@@ -6,7 +6,7 @@ This exercise is designed to give you unlimited creative freedom as you develop 
 
 Since we use Next.js as our frontend framework, we've included it as part of the repo; if you wish to use it, here's a good [starting point](https://nextjs.org/learn/basics/create-nextjs-app).
 
-To get started:
+## To get started:
 1. Fork or clone this repo.
 2. Implement your code.
 3. Send us a link to your repo for review.
