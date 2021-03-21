@@ -1,0 +1,13 @@
+.avatar_circle {
+    height: 55px;
+    width: 55px;
+    border-radius: 50%;
+    background-color: None;
+    border: 1px solid blue;
+    text-align: center;
+    font-size: 28px;
+    padding-top: 10px;
+    display: inline-block;
+    margin: 8px;
+    margin-bottom: 15px;
+}
