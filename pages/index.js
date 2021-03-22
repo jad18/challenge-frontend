@@ -3,6 +3,7 @@ import styles from '../styles/Home.module.css'
 import Avatars from './Avatars'
 import getCurrentDay, { formatAndSetDate, BirthdayMonth, BirthdayDay,
        BirthdayYear } from './Dates'
+import ChoiceWheel from './ChoiceWheel'
 import React from 'react'
 
 
@@ -77,6 +78,12 @@ export default class Home extends React.Component {
         : <div></div>
 
       }
+
+      <div id="bd-container" className={styles.choice_wheel_section}>
+        {<ChoiceWheel start={1} end={31} begin={6} id="bd-day" />}
+        {<ChoiceWheel start={1} end={12} begin={6} id="bd-month" />}
+        {<ChoiceWheel start={1920} end={2021} begin={6} id="bd-year" />}
+      </div>
 
     </div>
     );
@@ -192,19 +199,19 @@ export default class Home extends React.Component {
       </main>
       {(this.state.level === 0)
         ? this.getNameFooter()
-        : <div></div>
+        : <></>
       }
 
       {(this.state.level === 1)
        ? <div className={styles.birthday_section}>
             {this.birthdaySelector()}
          </div>
-       : <div></div>
+       : <></>
       }
 
       {(this.state.level === 2)
        ? this.pronounSelector()
-       : <div></div>
+       : <></>
       }
 
     </div>
