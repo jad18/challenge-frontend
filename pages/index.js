@@ -1,7 +1,8 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import Avatars from './Avatars'
-import getCurrentDay, { formatAndSetDate } from './Dates'
+import getCurrentDay, { formatAndSetDate, BirthdayMonth, BirthdayDay,
+       BirthdayYear } from './Dates'
 import React from 'react'
 
 
@@ -11,14 +12,18 @@ export default class Home extends React.Component {
     super();
     this.state = {
       level: 0,
+      birthdayLevel: 0,
       name: "", 
       birthday: "", 
-      pronouns: ""
+      pronouns: "",
+      pronoun_selected: -1,
     };
 
     this.getBody = this.getBody.bind(this);
     this.getNameFooter = this.getNameFooter.bind(this);
     this.setName = this.setName.bind(this);
+    this.birthdaySelector = this.birthdaySelector.bind(this);
+    this.setPronouns = this.setPronouns.bind(this);
   }
 
   getBody()
@@ -45,6 +50,7 @@ export default class Home extends React.Component {
               Since this is your first time meeting me, let's say my birthday
               is today, {getCurrentDay()}.
             </p>
+            <br/>
             <p className={styles.bot_entry}>
               <b>When's your birthday?</b>
             </p>
@@ -79,6 +85,7 @@ export default class Home extends React.Component {
   {
   return(
     <div className={styles.main_footer}>
+      <div>
       <input
         id="name_textbox"
         className={styles.name_input}
@@ -89,6 +96,7 @@ export default class Home extends React.Component {
         onClick={this.setName}>
         {'⪢'}
       </button>
+      </div>
     </div>
     );
   }
@@ -96,10 +104,74 @@ export default class Home extends React.Component {
   setName()
   {
     const text = document.getElementById("name_textbox").value;
-    console.log(this.state);
     if(text != undefined && text.length > 0)
       this.setState({ name: text, level: this.state.level + 1 });
   }
+
+  birthdaySelector()
+  {
+    if(this.state.birthdayLevel === 0)
+      return BirthdayMonth(this);
+    else if(this.state.birthdayLevel === 1)
+      return BirthdayDay(this);
+    else
+      return BirthdayYear(this);
+  }
+
+  pronounSelector()
+  {
+    return(
+      <div className={styles.pronoun_box}>
+        <p className={styles.pronoun_header}>Select one</p>
+        <table>
+          <tr>
+            <td className={styles.pronoun_table_entry}>
+              <div
+              className={(this.state.pronoun_selected === 0)
+                ? styles.pronoun_button_selected
+                : styles.pronoun_button}
+              onClick={() => this.setState({pronoun_selected: 0})}><span>👨</span></div>
+            </td>
+            <td className={styles.pronoun_table_entry}>
+              <div
+                className={(this.state.pronoun_selected === 1)
+                  ? styles.pronoun_button_selected
+                  : styles.pronoun_button}
+                onClick={() => this.setState({pronoun_selected: 1})}><div>👩</div></div>
+            </td>
+            <td className={styles.pronoun_table_entry}>
+              <div
+                className={(this.state.pronoun_selected === 2)
+                  ? styles.pronoun_button_selected
+                  : styles.pronoun_button}
+                onClick={() => this.setState({pronoun_selected: 2})}>😊</div>
+            </td>
+          </tr>
+          <tr>
+            <td className={styles.pronoun_table_entry}>He / Him</td>
+            <td className={styles.pronoun_table_entry}>She / Her</td>
+            <td className={styles.pronoun_table_entry}>They / Them</td>
+          </tr>
+        </table>
+        <button className={styles.submit_pronouns_button}
+          onClick={this.setPronouns}>
+          Submit
+        </button>
+      </div>
+    );
+  }
+
+  setPronouns()
+  {
+    var pronouns;
+    if(this.state.pronoun_selected === 0) pronouns="He / Him";
+    else if(this.state.pronoun_selected === 1) pronouns="She / Her";
+    else if(this.state.pronoun_selected === 2) pronouns="They / Them";
+    else return;
+
+    this.setState({level: this.state.level + 1, pronouns: pronouns});
+  }
+
 
   render()
   {
@@ -117,10 +189,23 @@ export default class Home extends React.Component {
       {this.getBody()}
         
       </main>
-      {(this.state.level == 0)
+      {(this.state.level === 0)
         ? this.getNameFooter()
         : <div></div>
       }
+
+      {(this.state.level === 1)
+       ? <div className={styles.birthday_section}>
+            {this.birthdaySelector()}
+         </div>
+       : <div></div>
+      }
+
+      {(this.state.level === 2)
+       ? this.pronounSelector()
+       : <div></div>
+      }
+
     </div>
   );
   }
