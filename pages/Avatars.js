@@ -1,6 +1,6 @@
 import styles from '../styles/Avatars.module.css'
 
-const avatar_list = ['🤖', '👽'];
+const avatar_list = ['🤖', '👽', '👨‍🍳', '👩‍🍳', '🙃'];
 
 export default function Avatars(props)
 {
@@ -15,8 +15,18 @@ export default function Avatars(props)
 
     return(
         <div>
-            <div className={styles.avatar_circle}>{avatar1}</div>
+            <div className={styles.avatar_circle}
+            onClick={() => updateAvatar(props.obj)}>{avatar1}</div>
             <div className={styles.avatar_circle}>{avatar2}</div>
         </div>
     )
+}
+
+function updateAvatar(obj)
+{
+    var index = obj.state.avatar_index;
+    if(index === avatar_list.length - 1) index = 1;
+    else index++;
+
+    obj.setState({ avatar_index: index });
 }
