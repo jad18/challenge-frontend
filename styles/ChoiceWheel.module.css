@@ -1,5 +1,6 @@
 .wheel_section {
     display: inline-block;
+    position: absolute;
     border: 1px solid red;
     margin-left: 60px;
     margin-right: 60px;
