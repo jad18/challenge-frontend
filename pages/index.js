@@ -17,6 +17,7 @@ export default class Home extends React.Component {
       birthday: "", 
       pronouns: "",
       pronoun_selected: -1,
+      avatar_index: 1,
     };
 
     this.getBody = this.getBody.bind(this);
@@ -130,14 +131,14 @@ export default class Home extends React.Component {
               className={(this.state.pronoun_selected === 0)
                 ? styles.pronoun_button_selected
                 : styles.pronoun_button}
-              onClick={() => this.setState({pronoun_selected: 0})}><span>👨</span></div>
+              onClick={() => this.setState({pronoun_selected: 0})}>👨</div>
             </td>
             <td className={styles.pronoun_table_entry}>
               <div
                 className={(this.state.pronoun_selected === 1)
                   ? styles.pronoun_button_selected
                   : styles.pronoun_button}
-                onClick={() => this.setState({pronoun_selected: 1})}><div>👩</div></div>
+                onClick={() => this.setState({pronoun_selected: 1})}>👩</div>
             </td>
             <td className={styles.pronoun_table_entry}>
               <div
@@ -183,7 +184,7 @@ export default class Home extends React.Component {
       </Head>
 
       <main className={styles.main}>
-        <Avatars index1={1} index2={0} />
+        <Avatars index1={this.state.avatar_index} index2={0} obj={this} />
         <hr className={styles.horz_line}/>
 
       {this.getBody()}
