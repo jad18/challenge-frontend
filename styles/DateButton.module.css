@@ -1,0 +1,23 @@
+.date_button {
+    display: inline-block;
+    width: 70px;
+    height: 40px;
+    font-size: 20px;
+    margin: 6px;
+    background-color: rgb(45, 101, 255);
+    vertical-align: center;
+    border-radius: 8px;
+    border: 1px solid black;
+    color: white;
+}
+
+.date_button:hover {
+    border-color: rgb(45, 101, 255);
+    color: rgb(45, 101, 255);
+    transition: 0.5s;
+    background-color: white;
+}
+
+.date_header {
+    margin-bottom: 3px;
+}
