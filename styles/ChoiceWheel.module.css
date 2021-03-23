@@ -1,8 +1,14 @@
 .wheel_section {
     display: inline-block;
+    width: 60px;
     position: absolute;
-    border: 1px solid red;
-    margin-left: 60px;
-    margin-right: 60px;
     font-size: 20px;
+}
+
+.wheel_section_container {
+    position: relative;
+    display: inline-block;
+    margin-left: 50px;
+    margin-right: 50px;
+    width: 60px;
 }

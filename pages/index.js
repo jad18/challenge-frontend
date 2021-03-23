@@ -80,8 +80,8 @@ export default class Home extends React.Component {
       }
 
       <div id="bd-container" className={styles.choice_wheel_section}>
-        {<ChoiceWheel start={1} end={31} begin={6} id="bd-day" />}
         {<ChoiceWheel start={1} end={12} begin={6} id="bd-month" />}
+        {<ChoiceWheel start={1} end={31} begin={6} id="bd-day" />}
         {<ChoiceWheel start={1920} end={2021} begin={6} id="bd-year" />}
       </div>
 

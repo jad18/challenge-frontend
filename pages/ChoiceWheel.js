@@ -2,6 +2,12 @@ import styles from '../styles/ChoiceWheel.module.css'
 
 export default function ChoiceWheel(props)
 {
+    const start = props.start;
+    const end = props.end;
+    var value = props.begin;
+    var pos_fin;
+    var pos_init;
+
     function getEntries()
     {
         return ([...Array(props.end - props.start + 1)].map((value, index) => {
@@ -12,34 +18,25 @@ export default function ChoiceWheel(props)
     }
 
     return(
-        <>
-            <div id={props.id} className={styles.wheel_section}>
+        <div className={styles.wheel_section_container} id={props.id + "-container"}>
+            <div id={props.id} className={styles.wheel_section} onMouseDown={dragWheel}>
                 {getEntries()}
             </div>
-        </>
+        </div>
     );
-}
-
-function draggableWheel(element, props)
-{
-    const start = props.start;
-    const end = props.end;
-    var value = props.begin;
-    var pos_fin;
-    var pos_init;
-
-    element.onmousedown = dragWheel;
 
     function dragWheel(event)
     {
+        const element = document.getElementById(props.id);
         event.preventDefault();
         pos_init = event.clientY;
-        element.onmouseup = setWheel;
         element.onmousemove = moveWheel;
+        element.onmouseup = setWheel;
     }
 
     function moveWheel(event)
     {
+        const element = document.getElementById(props.id);
         event.preventDefault();
         pos_fin = pos_init - event.clientY;
         pos_init = event.clientY;
@@ -48,7 +45,8 @@ function draggableWheel(element, props)
 
     function setWheel()
     {
-        element.onmouseup = null;
+        const element = document.getElementById(props.id);
         element.onmousemove = null;
+        element.onmouseup = null;
     }
 }
